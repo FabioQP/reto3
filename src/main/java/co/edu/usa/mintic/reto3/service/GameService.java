@@ -1,11 +1,13 @@
 package co.edu.usa.mintic.reto3.service;
 
-import co.edu.usa.mintic.reto3.model.Client;
-import co.edu.usa.mintic.reto3.model.Game;
-import co.edu.usa.mintic.reto3.repository.GameRepository;
+import co.edu.usa.mintic.reto3.model.Category;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import co.edu.usa.mintic.reto3.model.Client;
+import co.edu.usa.mintic.reto3.model.Game;
+import co.edu.usa.mintic.reto3.repository.GameRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +43,36 @@ public class GameService {
                 return game;
             }
         }
+    }
+
+    public Game update(Game game) {
+
+        if(game.getId() == null) {
+            return repository.save(game);
+        } else {
+            Optional<Game> result = repository.findById(game.getId());
+            if(result.isPresent()) {
+
+                Game existing = result.get();
+                existing.setName(Optional.of(game.getName()).orElse(existing.getName()));
+                existing.setDescription(Optional.of(game.getDescription()).orElse(existing.getDescription()));
+                existing.setDeveloper(Optional.of(game.getDeveloper()).orElse(existing.getDeveloper()));
+                existing.setYear(Optional.of(game.getYear()).orElse(existing.getYear()));
+
+                if(game.getCategory() != null) { existing.setCategory(game.getCategory()); }
+                if(game.getMessages() != null) { existing.setMessages(game.getMessages()); }
+                if(game.getReservations() != null) { existing.setReservations(game.getReservations()); }
+
+                return repository.save(existing);
+            } else {
+                return game;
+            }
+        }
+    }
+
+    public boolean delete(int id) {
+
+        repository.deleteById(id);
+        return true;
     }
 }

@@ -8,7 +8,26 @@
         <script type="text/javascript" src="js/functions.js"></script>
     </head>
     <body>
-        <h1>Misi&oacute;n TIC 2022</h1>
+
+        <h2>Administraci&oacute;n de Categorias</h2>
+
+        <b>Listado de Categorias</b>
+        </br></br>
+        <div id="resultadoCategories"></div>
+        </br>
+        <button onclick="traerInformacionCategories()">Consultar</button>
+        </br></br>
+
+        <b>Formulario de Creaci&oacute;n y Actualizaci&oacute;n</b>
+        </br></br>
+        <div>
+            <!-- <input type="number" id="idCategory" placeholder="id no se muestra">-->
+            <input type="text" id="nameCategory" placeholder="name 45 caracteres">
+            <input type="text" id="descriptionCategory" placeholder="description 250 caracteres">
+        </div>
+        </br></br>
+        <button onclick="guardarInformacionCategories()">Guardar Categoria</button>
+        <button onclick="editarInformacionCategories()">Actualizar Categoria</button>
 
         <h2>Administraci&oacute;n de Juegos</h2>
 
@@ -22,11 +41,11 @@
         <b>Formulario de Creaci&oacute;n y Actualizaci&oacute;n</b>        
         </br></br>
         <div>
-            <input type="number" id="idGame" placeholder="id">
-            <input type="text" id="developerGame" placeholder="developer">
-            <input type="number" id="minageGame" placeholder="minage">
-            <input type="number" id="category_idGame" placeholder="category_id">
-            <input type="text" id="nameGame" placeholder="name">
+            <!--<input type="number" id="idGame" placeholder="id no se muestra">-->
+            <input type="text" id="developerGame" placeholder="developer 45 caracteres">
+            <input type="number" id="yearGame" placeholder="year">
+            <input type="text" id="nameGame" placeholder="name 45 caracteres">
+            <input type="text" id="descriptionGame" placeholder="description 250 caracteres">
         </div>  
         </br></br>      
         <button onclick="guardarInformacionGames()">Guardar Juego</button>      
@@ -44,11 +63,11 @@
         <b>Formulario de Creaci&oacute;n y Actualizaci&oacute;n</b>        
         </br></br>
         <div>
-            <input type="number" id="idClient" placeholder="id">
-            <input type="text" id="nameClient" placeholder="name">
-            <input type="text" id="emailClient" placeholder="email">
-            <input type="number" id="ageClient" placeholder="age">
-
+            <!--<input type="number" id="idClient" placeholder="id">-->
+            <input type="text" id="nameClient" placeholder="name 45 caracteres">
+            <input type="text" id="emailClient" placeholder="email 45 caracteres">
+            <input type="number" id="ageClient" placeholder="age numero">
+            <input type="text" id="passwordClient" placeholder="password no se muestra">
         </div>  
         </br></br>      
         <button onclick="guardarInformacionClients()">Guardar Cliente</button>      
@@ -66,8 +85,8 @@
         <b>Formulario de Creaci&oacute;n y Actualizaci&oacute;n</b>        
         </br></br>
         <div>
-            <input type="number" id="idMessage" placeholder="id">
-            <input type="text" id="messageTextMessage" placeholder="name">
+            <!--<input type="number" id="idMessage" placeholder="id">-->
+            <input type="text" id="messageTextMessage" placeholder="name 250 caracteres">
         </div>  
         </br></br>      
         <button onclick="guardarInformacionMessages()">Guardar Mensaje</button>      

@@ -1,10 +1,13 @@
 package co.edu.usa.mintic.reto3.service;
 
+import co.edu.usa.mintic.reto3.model.Category;
+import co.edu.usa.mintic.reto3.model.Client;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import co.edu.usa.mintic.reto3.model.Game;
 import co.edu.usa.mintic.reto3.model.Message;
 import co.edu.usa.mintic.reto3.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,5 +43,32 @@ public class MessageService {
                 return message;
             }
         }
+    }
+
+    public Message update(Message message) {
+
+        if(message.getIdMessage() == null) {
+            return repository.save(message);
+        } else {
+            Optional<Message> result = repository.findById(message.getIdMessage());
+            if(result.isPresent()) {
+
+                Message existing = result.get();
+                existing.setMessageText(Optional.of(message.getMessageText()).orElse(existing.getMessageText()));
+
+                if(message.getClient() != null) { existing.setClient(message.getClient()); }
+                if(message.getGame() != null) { existing.setGame(message.getGame()); }
+
+                return repository.save(existing);
+            } else {
+                return message;
+            }
+        }
+    }
+
+    public boolean delete(int id) {
+
+        repository.deleteById(id);
+        return true;
     }
 }

@@ -1,9 +1,11 @@
 package co.edu.usa.mintic.reto3.service;
 
-import co.edu.usa.mintic.reto3.model.Category;
-import co.edu.usa.mintic.reto3.repository.CategoryRepository;
+import co.edu.usa.mintic.reto3.model.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import co.edu.usa.mintic.reto3.model.Category;
+import co.edu.usa.mintic.reto3.repository.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +27,12 @@ public class CategoryService {
     }
 
     public Optional<Category> getCategory(int id) {
+
         return repository.findById(id);
     }
 
     public Category save(Category category) {
+
         if(category.getId() == null) {
             return repository.save(category);
         } else {
@@ -39,5 +43,32 @@ public class CategoryService {
                 return category;
             }
         }
+    }
+
+    public Category update(Category category) {
+
+        if(category.getId() == null) {
+            return repository.save(category);
+        } else {
+            Optional<Category> result = repository.findById(category.getId());
+            if(result.isPresent()) {
+
+                Category existing = result.get();
+                existing.setName(Optional.of(category.getName()).orElse(existing.getName()));
+                existing.setDescription(Optional.of(category.getDescription()).orElse(existing.getDescription()));
+
+                return repository.save(existing);
+            } else {
+                return category;
+            }
+        }
+
+
+    }
+
+    public boolean delete(int id) {
+
+        repository.deleteById(id);
+        return true;
     }
 }

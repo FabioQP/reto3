@@ -1,7 +1,8 @@
 package co.edu.usa.mintic.reto3.repository;
 
-import co.edu.usa.mintic.reto3.model.Game;
 import org.springframework.data.repository.CrudRepository;
+
+import co.edu.usa.mintic.reto3.model.Game;
 
 public interface GameRepository extends CrudRepository<Game, Integer> {
 }

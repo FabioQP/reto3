@@ -29,6 +29,7 @@ public class Game implements Serializable {
 
     private String developer;
     private Integer year;
+
     private String name;
     private String description;
 

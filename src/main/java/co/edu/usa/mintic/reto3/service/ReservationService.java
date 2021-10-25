@@ -1,10 +1,12 @@
 package co.edu.usa.mintic.reto3.service;
 
+import co.edu.usa.mintic.reto3.model.Category;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import co.edu.usa.mintic.reto3.model.Message;
 import co.edu.usa.mintic.reto3.model.Reservation;
 import co.edu.usa.mintic.reto3.repository.ReservationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,5 +45,35 @@ public class ReservationService {
                 return reservation;
             }
         }
+    }
+
+    public Reservation update(Reservation reservation) {
+
+        if(reservation.getIdReservation() == null) {
+            return repository.save(reservation);
+        } else {
+            Optional<Reservation> result = repository.findById(reservation.getIdReservation());
+            if(result.isPresent()) {
+
+                Reservation existing = result.get();
+                existing.setStatus(Optional.of(reservation.getStatus()).orElse(existing.getStatus()));
+                existing.setScore(Optional.of(reservation.getScore()).orElse(existing.getScore()));
+                existing.setStartDate(Optional.of(reservation.getStartDate()).orElse(existing.getStartDate()));
+                existing.setDevolutionDate(Optional.of(reservation.getDevolutionDate()).orElse(existing.getDevolutionDate()));
+
+                if(reservation.getGame() != null) { existing.setGame(reservation.getGame()); }
+                if(reservation.getClient() != null) { existing.setClient(reservation.getClient()); }
+
+                return repository.save(existing);
+            } else {
+                return reservation;
+            }
+        }
+    }
+
+    public boolean delete(int id) {
+
+        repository.deleteById(id);
+        return true;
     }
 }
