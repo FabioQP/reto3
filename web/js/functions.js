@@ -247,7 +247,6 @@ function traerInformacionClients(){
         type: "GET",
         datatype: "JSON",
         success: function(respuestaClients){
-            console.log(respuestaClients);
             $("#resultadoClients").empty();
             pintarRespuestaClients(respuestaClients);
         }
@@ -367,16 +366,12 @@ function borrarElementoClients(idClient){
 
 function traerInformacionMessages(){
     $.ajax({
-        url: "http://144.22.232.202/api/Message/all",
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        },        
+        url: "http://localhost:8080/api/Message/all",
         type: "GET",
         datatype: "JSON",
         success: function(respuestaMessages){
-            console.log(respuestaMessages);
             $("#resultadoMessages").empty();
-            pintarRespuestaMessages(respuestaMessages.items);
+            pintarRespuestaMessages(respuestaMessages);
         }
     });
 }
@@ -389,10 +384,10 @@ function pintarRespuestaMessages(items){
 
     for(i=0; i<items.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + items[i].id + "</td>";
-        myTable += "<td>" + items[i].messagetext + "</td>";
-        myTable += "<td> <button onclick='detalleInformacionMessages(" + items[i].id + "," + "\"" + items[i].messagetext + "\"" + ")'> Detalle </button></td>";
-        myTable += "<td> <button onclick='borrarElementoMessages(" + items[i].id + ")'> Borrar </button></td>";
+        myTable += "<td>" + items[i].idMessage + "</td>";
+        myTable += "<td>" + items[i].messageText + "</td>";
+        myTable += "<td> <button onclick='detalleInformacionMessages(" + items[i].idMessage + "," + "\"" + items[i].messageText + "\"" + ")'> Detalle </button></td>";
+        myTable += "<td> <button onclick='borrarElementoMessages(" + items[i].idMessage + ")'> Borrar </button></td>";
         myTable += "</tr>";
     }
 
@@ -403,14 +398,14 @@ function pintarRespuestaMessages(items){
 
 function guardarInformacionMessages(){
     let myData={
-        id:$("#idMessage").val(),
-        messagetext:$("#messageTextMessage").val()
+        idMessage:$("#idMessage").val(),
+        messageText:$("#messageTextMessage").val()
     };   
     
     let dataToSend=JSON.stringify(myData);
 
     $.ajax({
-        url:"http://144.22.232.202/api/Message/save",
+        url:"http://localhost:8080/api/Message/save",
         type:"POST",
         contentType: "application/json",
         data:dataToSend,
@@ -426,21 +421,21 @@ function guardarInformacionMessages(){
 
 function detalleInformacionMessages(idMessage, messageTextMessage){
     let myData={
-        id:$("#idMessage").val(idMessage).prop('disabled', true),
-        messagetext:$("#messageTextMessage").val(messageTextMessage)
+        idMessage:$("#idMessage").val(idMessage).prop('disabled', true),
+        messageText:$("#messageTextMessage").val(messageTextMessage)
     };   
 }
 
 function editarInformacionMessages(){
     let myData={
-        id:$("#idMessage").val(),
-        messagetext:$("#messageTextMessage").val()
+        idMessage:$("#idMessage").val(),
+        messageText:$("#messageTextMessage").val()
     };   
     
     let dataToSend=JSON.stringify(myData);
 
     $.ajax({
-        url:"http://144.22.232.202/api/Message/",
+        url:"http://localhost:8080/api/Message/update",
         type:"PUT",
         contentType: "application/json",
         data:dataToSend,
@@ -456,17 +451,11 @@ function editarInformacionMessages(){
 }
 
 function borrarElementoMessages(idMessage){
-    let myData={
-        id:idMessage
-    };   
-    
-    let dataToSend=JSON.stringify(myData);
 
     $.ajax({
-        url:"http://144.22.232.202/api/Message/",
+        url:"http://localhost:8080/api/Message/" + idMessage,
         type:"DELETE",
         contentType: "application/json",
-        data:dataToSend,
         datatype:"JSON",
         success:function(respuestaMessages) {
             $("#resultadoMessages").empty();

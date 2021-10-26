@@ -1,4 +1,4 @@
-package co.edu.usa.mintic.reto4.controller;
+package co.edu.usa.mintic.reto3.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
