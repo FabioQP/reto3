@@ -487,7 +487,7 @@ function pintarRespuestaReservations(items){
 
     let myTable = "<table border=1>";
 
-    myTable += "<tr><th>Id</th><th>startDate</th><th>startDate</th><th>devolutionDate</th><th>status</th><th>score</th><th>Action</th><th>Action</th></tr>";
+    myTable += "<tr><th>Id</th><th>startDate</th><th>devolutionDate</th><th>status</th><th>score</th><th>Action</th><th>Action</th></tr>";
 
     for(i=0; i<items.length; i++) {
         myTable += "<tr>";

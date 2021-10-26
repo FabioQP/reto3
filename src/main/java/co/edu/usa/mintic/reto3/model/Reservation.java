@@ -54,20 +54,22 @@ public class Reservation implements Serializable {
         this.status = status;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public String getStartDate() {
+
+        // return startDate;
+        return startDate.toString().concat("T00:00:00.000+00:00");
     }
 
     public void setDevolutionDate(LocalDate devolutionDate) {
         this.devolutionDate = devolutionDate;
     }
 
-    public LocalDate getDevolutionDate() {
-        return devolutionDate;
+    public String getDevolutionDate() {
+
+        // return devolutionDate;
+        return devolutionDate.toString().concat("T00:00:00.000+00:00");
     }
 
     public Float getScore() {

@@ -58,8 +58,8 @@ public class ReservationService {
                 Reservation existing = result.get();
                 existing.setStatus(Optional.of(reservation.getStatus()).orElse(existing.getStatus()));
                 existing.setScore(Optional.of(reservation.getScore()).orElse(existing.getScore()));
-                existing.setStartDate(Optional.of(reservation.getStartDate()).orElse(existing.getStartDate()));
-                existing.setDevolutionDate(Optional.of(reservation.getDevolutionDate()).orElse(existing.getDevolutionDate()));
+                // existing.setStartDate(Optional.of(reservation.getStartDate()).orElse(existing.getStartDate()));
+                // existing.setDevolutionDate(Optional.of(reservation.getDevolutionDate()).orElse(existing.getDevolutionDate()));
 
                 if(reservation.getGame() != null) { existing.setGame(reservation.getGame()); }
                 if(reservation.getClient() != null) { existing.setClient(reservation.getClient()); }
