@@ -464,3 +464,135 @@ function borrarElementoMessages(idMessage){
         }
     });
 }
+
+
+
+
+
+
+
+function traerInformacionReservations(){
+    $.ajax({
+        url: "http://localhost:8080/api/Reservation/all",
+        type: "GET",
+        datatype: "JSON",
+        success: function(respuestaReservations){
+            $("#resultadoReservations").empty();
+            pintarRespuestaReservations(respuestaReservations);
+        }
+    });
+}
+
+function pintarRespuestaReservations(items){
+
+    let myTable = "<table border=1>";
+
+    myTable += "<tr><th>Id</th><th>startDate</th><th>startDate</th><th>devolutionDate</th><th>status</th><th>score</th><th>Action</th><th>Action</th></tr>";
+
+    for(i=0; i<items.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + items[i].idReservation + "</td>";
+        myTable += "<td>" + items[i].startDate + "</td>";
+        myTable += "<td>" + items[i].devolutionDate + "</td>";
+        myTable += "<td>" + items[i].status + "</td>";
+        myTable += "<td>" + items[i].score + "</td>";
+        myTable += "<td> <button onclick='detalleInformacionReservations("
+            + items[i].idReservation + ","
+            + "\"" + items[i].startDate + "\"" + ","
+            + "\"" + items[i].devolutionDate + "\"" + ","
+            + "\"" + items[i].status + "\"" + ","
+            + items[i].score +
+        ")'> Detalle </button></td>";
+        myTable += "<td> <button onclick='borrarElementoReservations(" + items[i].idReservation + ")'> Borrar </button></td>";
+        myTable += "</tr>";
+    }
+
+    myTable += "</table>";
+    $("#idReservation").prop('disabled', false),
+        $("#resultadoReservations").append(myTable);
+}
+
+function guardarInformacionReservations(){
+    let myData={
+        idReservation:$("#idReservation").val(),
+        startDate:$("#startDateReservation").val(),
+        devolutionDate:$("#devolutionDateReservation").val(),
+        status:$("#statusReservation").val(),
+        score:$("#scoreReservation").val()
+    };
+
+    let dataToSend=JSON.stringify(myData);
+
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/save",
+        type:"POST",
+        contentType: "application/json",
+        data:dataToSend,
+        datatype:"JSON",
+        success:function(respuestaReservations) {
+            $("#resultadoReservations").empty();
+            $("#idReservation").val("");
+            $("#startDateReservation").val("");
+            $("#devolutionDateReservation").val("");
+            $("#statusReservation").val("");
+            $("#scoreReservation").val("");
+            traerInformacionMessages();
+            alert("Se ha guardado una Reservacion.")
+        }
+    });
+}
+
+function detalleInformacionReservations(idReservation, startDateReservation, devolutionDateReservation, statusReservation, scoreReservation){
+    let myData={
+        idReservation:$("#idReservation").val(idReservation).prop('disabled', true),
+        startDate:$("#startDateReservation").val(startDateReservation),
+        devolutionDate:$("#devolutionDateReservation").val(devolutionDateReservation),
+        status:$("#statusReservation").val(statusReservation),
+        score:$("#scoreReservation").val(scoreReservation)
+    };
+}
+
+function editarInformacionReservations(){
+    let myData={
+        idMessage:$("#ideservation").val(),
+        startDate:$("#startDateReservation").val(),
+        devolutionDate:$("#devolutionDateReservation").val(),
+        status:$("#statusReservation").val(),
+        score:$("#scoreReservation").val()
+    };
+
+    let dataToSend=JSON.stringify(myData);
+
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/update",
+        type:"PUT",
+        contentType: "application/json",
+        data:dataToSend,
+        datatype:"JSON",
+        success:function(respuestaReservations) {
+            $("#respuestaReservations").empty();
+            $("#idReservation").val("");
+            $("#startDateReservation").val("");
+            $("#devolutionDateReservation").val("");
+            $("#statusReservation").val("");
+            $("#scoreReservation").val("");
+            traerInformacionMessages();
+            alert("Se ha actualizado una Reservacion.")
+        }
+    });
+}
+
+function borrarElementoReservations(idReservation){
+
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/" + idReservation,
+        type:"DELETE",
+        contentType: "application/json",
+        datatype:"JSON",
+        success:function(respuestaReservations) {
+            $("#resultadoReservations").empty();
+            traerInformacionReservations();
+            alert("Se ha eliminado una Reservacion.")
+        }
+    });
+}

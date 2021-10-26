@@ -90,7 +90,30 @@
         </div>  
         </br></br>      
         <button onclick="guardarInformacionMessages()">Guardar Mensaje</button>      
-        <button onclick="editarInformacionMessages()">Actualizar Mensaje</button>      
+        <button onclick="editarInformacionMessages()">Actualizar Mensaje</button>
 
+
+        <h2>Administraci&oacute;n de Reservas</h2>
+
+        <b>Listado de Reservas</b>
+        </br></br>
+        <div id="resultadoReservations"></div>
+        </br>
+        <button onclick="traerInformacionReservations()">Consultar</button>
+        </br></br>
+
+        <b>Formulario de Creaci&oacute;n y Actualizaci&oacute;n</b>
+        </br></br>
+        <div>
+            <input type="hidden" id="idReservation" placeholder="id">
+            <input type="text" id="startDateReservation" placeholder="startDate">
+            <input type="text" id="devolutionDateReservation" placeholder="devolutionDate">
+            <input type="text" id="statusReservation" placeholder="status">
+            <input type="text" id="scoreReservation" placeholder="score">
+
+        </div>
+        </br></br>
+        <button onclick="guardarInformacionReservations()">Guardar Reserva</button>
+        <button onclick="editarInformacionReservations()">Actualizar Reserva</button>
     </body>
 </html>
